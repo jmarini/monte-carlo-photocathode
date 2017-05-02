@@ -1,0 +1,16 @@
+#!/usr/bin/gnuplot
+
+if(ARGC<1) ARG1="100"
+ARG1 = ARG1 + 0
+
+set terminal gif animate delay 5
+set output sprintf("band2.gif", ARG1)
+
+#set yrange [0:5]
+
+do for [i=1:ARG1] {
+    set title sprintf("Timestep %03d", i)
+    plot sprintf("potential%03d.xyz", i) using 1:(-$3) with lines notitle, \
+         sprintf("particle_info%03d.xyz", i) using ($9*1e6):7 notitle
+         #sprintf("< join potential%03d.xyz energy%03d.xyz", i, i) using 1:(-$3+$5) notitle
+}

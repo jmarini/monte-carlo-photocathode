@@ -1,0 +1,14 @@
+#!/usr/bin/gnuplot
+
+n = 100.
+max = 5.
+min = 0.
+width = (max-min)/n
+
+hist(x,w) = w*floor(x/w)+w/2.0
+
+set boxwidth width*0.9
+set style fill solid 0.25 border -1
+set xrange [min:max]
+
+plot "emitted.csv" using (hist($3,width)):1.0 smooth freq with boxes lc "black" notitle

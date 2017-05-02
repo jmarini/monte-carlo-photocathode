@@ -1,0 +1,9 @@
+#!/usr/bin/gnuplot
+
+if(ARGC<1) ARG1="0"
+ARG1 = ARG1 + 0
+
+set title sprintf("Timestep %03d", ARG1)
+plot sprintf("potential%03d.xyz", ARG1) using 1:(-$3) with lines notitle, \
+     sprintf("< join potential%03d.xyz energy%03d.xyz", ARG1, ARG1) using 1:(-$3+$5) notitle
+

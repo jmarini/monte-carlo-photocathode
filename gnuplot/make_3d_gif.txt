@@ -1,0 +1,25 @@
+#!/usr/bin/gnuplot
+
+if(ARGC < 2) {
+    ARG2 = "100" # default value
+}
+ARG2 = ARG2 + 0  # convert string to number
+
+# set up gif creation
+set terminal gif animate delay 5
+set output sprintf("%s_3d.gif", ARG1)
+
+# set up z-axis for density plot
+#if(ARG1 eq "density") {
+#    set zrange [1e21:1e25]
+#    set logscale z 10
+#}
+
+#set xrange [-8e9:8e9]
+#set yrange [0:5]
+set zrange [5e22:2e23]
+
+do for [i=1:ARG2] {
+    set title sprintf("Timestep %03d", i)
+    splot sprintf("%s%03d.xyz", ARG1, i) notitle
+}
